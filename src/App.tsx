@@ -26,14 +26,9 @@ function App() {
       {/* Header Fixo */}
       <header className="fixed top-0 left-0 right-0 bg-white shadow-md z-50 py-3 md:py-4">
         <div className="container mx-auto px-4 flex justify-center items-center">
-          <div className="flex items-center space-x-3">
-            <div className="flex items-center justify-center w-10 h-10 md:w-12 md:h-12 bg-gradient-to-br from-green-500 to-green-600 rounded-full shadow-lg">
-              <Activity className="w-5 h-5 md:w-6 md:h-6 text-white" strokeWidth={2.5} />
-            </div>
-            <h1 className="text-xl md:text-2xl lg:text-3xl font-black text-gray-800 font-playfair tracking-tight">
-              Protocolo <span className="text-green-600">Alívio Já</span>
-            </h1>
-          </div>
+          <h1 className="text-xl md:text-2xl lg:text-3xl font-black text-gray-800 font-playfair tracking-tight">
+            🦴 Protocolo <span className="text-green-600">Alívio Já</span>
+          </h1>
         </div>
       </header>
 
@@ -56,22 +51,17 @@ function App() {
             <strong className="text-green-600 font-bold"> sem remédios caros nem efeitos colaterais.</strong>
           </p>
 
-          {/* Video Player Embed */}
-          <div className="max-w-sm sm:max-w-md md:max-w-lg lg:max-w-xl mx-auto mb-10 md:mb-12">
-            <div className="bg-gray-900 rounded-2xl overflow-hidden shadow-2xl">
-              <div className="aspect-video bg-gray-800 flex items-center justify-center relative rounded-2xl overflow-hidden">
-                <vturb-smartplayer 
-                  id="vid-6877d2e30fe8209acf4cca58" 
-                  style={{
-                    display: 'block',
-                    margin: '0 auto',
-                    width: '100%',
-                    height: '100%',
-                    borderRadius: '16px'
-                  }}
-                />
-              </div>
-            </div>
+          {/* VSL Player */}
+          <div className="max-w-sm mx-auto mb-10 md:mb-12">
+            <vturb-smartplayer 
+              id="vid-6877d2e30fe8209acf4cca58" 
+              style={{
+                display: 'block',
+                margin: '0 auto',
+                width: '100%',
+                maxWidth: '400px'
+              }}
+            />
           </div>
 
           {showButton && (
