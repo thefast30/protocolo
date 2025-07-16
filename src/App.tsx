@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Activity } from 'lucide-react';
 
 function App() {
   const [showButton, setShowButton] = useState(false);
@@ -23,48 +24,52 @@ function App() {
   return (
     <div className="min-h-screen bg-white font-inter">
       {/* Header Fixo */}
-      <header className="fixed top-0 left-0 right-0 bg-white shadow-md z-50 py-2 md:py-4">
+      <header className="fixed top-0 left-0 right-0 bg-white shadow-md z-50 py-3 md:py-4">
         <div className="container mx-auto px-4 flex justify-center items-center">
-          <div className="flex items-center space-x-2">
-            <img 
-              src="/logo-protocolo-alivio-ja.png" 
-              alt="Protocolo Alívio Já" 
-              className="h-6 md:h-10 w-auto"
-            />
+          <div className="flex items-center space-x-3">
+            <div className="flex items-center justify-center w-10 h-10 md:w-12 md:h-12 bg-gradient-to-br from-green-500 to-green-600 rounded-full shadow-lg">
+              <Activity className="w-5 h-5 md:w-6 md:h-6 text-white" strokeWidth={2.5} />
+            </div>
+            <h1 className="text-xl md:text-2xl lg:text-3xl font-black text-gray-800 font-playfair tracking-tight">
+              Protocolo <span className="text-green-600">Alívio Já</span>
+            </h1>
           </div>
         </div>
       </header>
 
       {/* Hero Section com VSL */}
-      <section className="pt-16 md:pt-20 pb-8 md:pb-12 bg-gradient-to-b from-green-50 to-white min-h-screen flex flex-col justify-center">
+      <section className="pt-20 md:pt-24 pb-8 md:pb-12 bg-gradient-to-b from-green-50 to-white min-h-screen flex flex-col justify-center">
         <div className="container mx-auto px-4 text-center max-w-4xl">
-          <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-black text-gray-800 mb-6 md:mb-8 leading-tight font-playfair tracking-tight">
+          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-black text-gray-800 mb-8 md:mb-10 leading-tight font-playfair tracking-tight">
             Você sente dores nas<br className="hidden sm:block" />
-            <span className="block mt-1 md:mt-2">articulações?</span><br />
-            <span className="text-green-600 bg-gradient-to-r from-green-600 to-green-700 bg-clip-text text-transparent drop-shadow-sm">
+            <span className="block mt-2 md:mt-3">articulações?</span><br />
+            <span className="text-green-600 bg-gradient-to-r from-green-600 to-green-700 bg-clip-text text-transparent drop-shadow-sm block mt-2 md:mt-3">
               Isso pode NÃO ser culpa<br className="hidden sm:block" />
-              <span className="block mt-1 md:mt-2">da sua idade.</span>
+              <span className="block mt-2 md:mt-3 text-red-600 bg-gradient-to-r from-red-600 to-red-700 bg-clip-text text-transparent font-extrabold text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl drop-shadow-md">
+                da sua idade.
+              </span>
             </span>
           </h1>
           
-          <p className="text-base sm:text-lg md:text-xl lg:text-2xl text-gray-600 mb-8 md:mb-10 max-w-3xl mx-auto leading-relaxed px-2">
+          <p className="text-lg sm:text-xl md:text-2xl lg:text-3xl text-gray-600 mb-10 md:mb-12 max-w-4xl mx-auto leading-relaxed px-2 font-medium">
             Descubra o protocolo caseiro que está devolvendo a liberdade de milhares de brasileiros, 
-            <strong className="text-green-600"> sem remédios caros nem efeitos colaterais.</strong>
+            <strong className="text-green-600 font-bold"> sem remédios caros nem efeitos colaterais.</strong>
           </p>
 
           {/* Video Player Embed */}
-          <div className="max-w-sm sm:max-w-md md:max-w-lg mx-auto mb-8 md:mb-10">
-            <div className="bg-gray-900 rounded-xl overflow-hidden shadow-2xl">
-              <div className="aspect-video bg-gray-800 flex items-center justify-center relative">
+          <div className="max-w-sm sm:max-w-md md:max-w-lg lg:max-w-xl mx-auto mb-10 md:mb-12">
+            <div className="bg-gray-900 rounded-2xl overflow-hidden shadow-2xl">
+              <div className="aspect-video bg-gray-800 flex items-center justify-center relative rounded-2xl overflow-hidden">
                 <vturb-smartplayer 
                   id="vid-6877d2e30fe8209acf4cca58" 
                   style={{
                     display: 'block',
                     margin: '0 auto',
                     width: '100%',
-                    maxWidth: '400px'
+                    height: '100%',
+                    borderRadius: '16px'
                   }}
-                ></vturb-smartplayer>
+                />
               </div>
             </div>
           </div>
@@ -73,9 +78,9 @@ function App() {
             <div className="px-4">
               <button 
                 onClick={scrollToCheckout}
-                className="w-full sm:w-auto bg-green-600 hover:bg-green-700 text-white px-8 sm:px-12 py-4 sm:py-5 rounded-full text-lg sm:text-xl font-bold shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105 max-w-sm mx-auto block"
+                className="w-full sm:w-auto bg-gradient-to-r from-green-600 to-green-700 hover:from-green-700 hover:to-green-800 text-white px-10 sm:px-16 py-5 sm:py-6 rounded-full text-xl sm:text-2xl font-bold shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-105 max-w-md mx-auto block border-2 border-green-500"
               >
-                Quero Começar Agora
+                🎯 Quero Começar Agora
               </button>
             </div>
           )}
@@ -83,17 +88,17 @@ function App() {
       </section>
 
       {/* Rodapé */}
-      <footer className="bg-gray-800 text-white py-8 md:py-12 mt-auto">
+      <footer className="bg-gray-800 text-white py-10 md:py-12 mt-auto">
         <div className="container mx-auto px-4">
-          <div className="text-center mb-6 md:mb-8">
-            <div className="flex flex-col sm:flex-row justify-center space-y-3 sm:space-y-0 sm:space-x-8 mb-6 text-sm md:text-base">
-              <a href="#" className="hover:text-green-400 transition-colors duration-200">Termos de Uso</a>
-              <a href="#" className="hover:text-green-400 transition-colors duration-200">Política de Privacidade</a>
-              <a href="#" className="hover:text-green-400 transition-colors duration-200">Suporte</a>
+          <div className="text-center mb-8 md:mb-10">
+            <div className="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-8 mb-8 text-sm md:text-base">
+              <a href="#" className="hover:text-green-400 transition-colors duration-200 font-medium">Termos de Uso</a>
+              <a href="#" className="hover:text-green-400 transition-colors duration-200 font-medium">Política de Privacidade</a>
+              <a href="#" className="hover:text-green-400 transition-colors duration-200 font-medium">Suporte</a>
             </div>
           </div>
           
-          <div className="text-center text-gray-400 text-xs md:text-sm px-4 leading-relaxed">
+          <div className="text-center text-gray-400 text-sm md:text-base px-4 leading-relaxed">
             © 2024 Protocolo Alívio Já. Todos os direitos reservados.
           </div>
         </div>
