@@ -1,3 +1,118 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800;900&display=swap');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+  html {
+    font-family: 'Inter', system-ui, sans-serif;
+  }
+}
+
+/* Otimizações para mobile */
+@media (max-width: 640px) {
+  .container {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+  
+  /* Ajustes específicos para mobile */
+  h1 {
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+  }
+  
+  /* Melhor espaçamento em telas pequenas */
+  section {
+    padding-top: 4rem;
+    padding-bottom: 2rem;
+  }
+}
+
+/* Melhorias de tipografia */
+.font-playfair {
+  font-family: 'Playfair Display', serif;
+  font-weight: 900;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.font-inter {
+  font-family: 'Inter', system-ui, sans-serif;
+}
+
+/* Ajustes para o player de vídeo */
+vturb-smartplayer {
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+}
+
+/* Melhorias de responsividade */
+@media (max-width: 768px) {
+  .aspect-video {
+    border-radius: 12px;
+  }
+  
+  /* Ajustes de espaçamento para mobile */
+  .container {
+    max-width: 100%;
+  }
+  
+  /* Melhor legibilidade em mobile */
+  p {
+    line-height: 1.6;
+  }
+}
+
+/* Ajustes de espaçamento */
+.leading-tight {
+  line-height: 1.1;
+}
+
+/* Gradiente de texto para melhor visual */
+.bg-clip-text {
+  -webkit-background-clip: text;
+  background-clip: text;
+}
+
+/* Sombra sutil no texto destacado */
+.drop-shadow-sm {
+  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.1));
+}
+
+/* Melhorias no botão */
+button {
+  letter-spacing: 0.025em;
+}
+
+/* Ajustes no footer */
+footer a {
+  text-decoration: none;
+  position: relative;
+}
+
+footer a:hover::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background-color: #4ade80;
+}
+
+/* Otimizações de performance */
+* {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Melhor contraste e legibilidade */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
