@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Activity } from 'lucide-react';
+import Logo from './components/Logo';
 
 function App() {
   const [showButton, setShowButton] = useState(false);
@@ -42,10 +42,7 @@ function App() {
       {/* Header Fixo */}
       <header className="fixed top-0 left-0 right-0 bg-white shadow-md z-50 py-3 md:py-4">
         <div className="container mx-auto px-4 flex justify-center items-center">
-          <h1 className="text-xl md:text-2xl lg:text-3xl font-black text-gray-800 font-playfair tracking-tight flex items-center gap-2">
-            <span className="text-green-600 text-2xl md:text-3xl lg:text-4xl">🦵</span>
-            Protocolo <span className="text-green-600">Alívio Já</span>
-          </h1>
+          <Logo />
         </div>
       </header>
 
