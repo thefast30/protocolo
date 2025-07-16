@@ -5,6 +5,22 @@ function App() {
   const [showButton, setShowButton] = useState(false);
   const [timeLeft, setTimeLeft] = useState(180); // 3 minutos em segundos
 
+  // Carregar script da VSL
+  React.useEffect(() => {
+    const script = document.createElement("script");
+    script.src = "https://scripts.converteai.net/0335ec20-c9d4-4221-a36e-428ccf9162ce/players/6877d2e30fe8209acf4cca58/v4/player.js";
+    script.async = true;
+    document.head.appendChild(script);
+    
+    return () => {
+      // Cleanup se necessário
+      const existingScript = document.querySelector(`script[src="${script.src}"]`);
+      if (existingScript) {
+        document.head.removeChild(existingScript);
+      }
+    };
+  }, []);
+
   // Timer effect
   React.useEffect(() => {
     if (timeLeft > 0) {
@@ -52,14 +68,10 @@ function App() {
           </p>
 
           {/* VSL Player */}
-          <div className="max-w-sm mx-auto mb-10 md:mb-12">
-            <vturb-smartplayer 
-              id="vid-6877d2e30fe8209acf4cca58" 
-              style={{
-                display: 'block',
-                margin: '0 auto',
-                width: '100%',
-                maxWidth: '400px'
+          <div className="max-w-sm mx-auto mb-10 md:mb-12" id="vsl-container">
+            <div 
+              dangerouslySetInnerHTML={{
+                __html: `<vturb-smartplayer id="vid-6877d2e30fe8209acf4cca58" style="display: block; margin: 0 auto; width: 100%; max-width: 400px;"></vturb-smartplayer>`
               }}
             />
           </div>
@@ -94,18 +106,6 @@ function App() {
         </div>
       </footer>
 
-      {/* Script do Player */}
-      <script 
-        type="text/javascript"
-        dangerouslySetInnerHTML={{
-          __html: `
-            var s=document.createElement("script"); 
-            s.src="https://scripts.converteai.net/0335ec20-c9d4-4221-a36e-428ccf9162ce/players/6877d2e30fe8209acf4cca58/v4/player.js"; 
-            s.async=true;
-            document.head.appendChild(s);
-          `
-        }}
-      />
     </div>
   );
 }
