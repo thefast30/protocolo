@@ -34,7 +34,7 @@ function App() {
   }, [timeLeft]);
 
   const scrollToCheckout = () => {
-    document.getElementById('checkout')?.scrollIntoView({ behavior: 'smooth' });
+    window.open('https://pay.kirvano.com/51c9da2f-ca9e-4fa4-ae34-f0e646202aba', '_blank');
   };
 
   return (
