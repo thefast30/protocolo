@@ -1,44 +1,57 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
+import { useEffect } from 'react';
 import Logo from './components/Logo';
 
 function App() {
   const [showButton, setShowButton] = useState(true);
+  const [utmParams, setUtmParams] = useState('');
 
-  // --- NOVA ABORDAGEM: CONSTRUÇÃO IMEDIATA ---
-  // 1. Definimos a URL base.
-  const baseUrl = "https://pay.kirvano.com/51c9da2f-ca9e-4fa4-ae34-f0e646202aba";
-  let finalCheckoutUrl = baseUrl; // Por padrão, a URL final é a base.
-
-  // 2. Verificamos os parâmetros da URL da página de forma síncrona.
-  //    Isso garante que o código rode antes que o script da VSL possa inicializar.
-  if (typeof window !== "undefined") {
-    const urlParams = new URLSearchParams(window.location.search);
-    if (urlParams.toString()) {
-      finalCheckoutUrl = `${baseUrl}?${urlParams.toString()}`;
-    }
-  }
-  // A variável 'finalCheckoutUrl' agora tem o link com os UTMs desde o início.
-  // Não precisamos mais do useState ou useEffect para isso.
-
-  // Carregar script da VSL (sem alterações aqui)
-  useEffect(() => {
+  // Carregar script da VSL
+  React.useEffect(() => {
     const script = document.createElement("script");
     script.src = "https://scripts.converteai.net/0335ec20-c9d4-4221-a36e-428ccf9162ce/players/6877d2e30fe8209acf4cca58/v4/player.js";
     script.async = true;
     document.head.appendChild(script);
     
     return () => {
+      // Cleanup se necessário
       const existingScript = document.querySelector(`script[src="${script.src}"]`);
       if (existingScript) {
         document.head.removeChild(existingScript);
       }
     };
   }, []);
+  
+  // Extract UTM parameters from current URL
+  useEffect(() => {
+    const urlParams = new URLSearchParams(window.location.search);
+    const utmKeys = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_term', 'utm_content', 'click_id', 'fbclid', 'gclid'];
+    const params = new URLSearchParams();
+    
+    utmKeys.forEach(key => {
+      const value = urlParams.get(key);
+      if (value) {
+        params.append(key, value);
+      }
+    });
+    
+    setUtmParams(params.toString());
+  }, []);
 
-  // A função de clique usa a variável que criamos.
-  const handleCheckoutClick = () => {
-    window.location.href = finalCheckoutUrl;
+  // Function to append UTM parameters to checkout URLs
+  const getCheckoutUrl = (baseUrl: string) => {
+    if (utmParams) {
+      return `${baseUrl}?${utmParams}`;
+    }
+    return baseUrl;
   };
+
+  const handleCheckoutClick = () => {
+    const baseUrl = "https://pay.kirvano.com/51c9da2f-ca9e-4fa4-ae34-f0e646202aba";
+    const finalUrl = getCheckoutUrl(baseUrl);
+    window.location.href = finalUrl;
+  };
+
 
   return (
     <div className="min-h-screen bg-gray-50 flex flex-col">
@@ -68,13 +81,9 @@ function App() {
 
           {/* VSL Player */}
           <div className="max-w-xs mx-auto mb-8 md:mb-10" id="vsl-container">
-            {/* 3. Usamos a variável 'finalCheckoutUrl' diretamente aqui. */}
             <div 
               dangerouslySetInnerHTML={{
-                __html: `<vturb-smartplayer 
-                           id="vid-6877d2e30fe8209acf4cca58"
-                           data-param-redirect_url="${finalCheckoutUrl}"
-                           style="display: block; margin: 0 auto; width: 100%; max-width: 400px;"></vturb-smartplayer>`
+                __html: `<vturb-smartplayer id="vid-6877d2e30fe8209acf4cca58" style="display: block; margin: 0 auto; width: 100%; max-width: 400px;"></vturb-smartplayer>`
               }}
             />
           </div>
