@@ -38,9 +38,9 @@ function App() {
         <div className="container mx-auto text-center">
           <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold text-gray-800 mb-6 md:mb-8 leading-tight px-4">
             <span className="block mb-2 md:mb-4">
-              Finalmente! O Protocolo Natural que
+              Você sente dores no JOELHO ao andar ou na COLUNA ao se abaixar?
               <span className="block text-green-600 mt-2">
-                Elimina a Dor nas Costas em 7 Dias
+                Isso pode NÃO ser culpa da sua idade.
               </span>
             </span>
           </h1>
