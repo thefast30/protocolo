@@ -3,9 +3,22 @@ import Logo from './components/Logo';
 
 function App() {
   const [showButton, setShowButton] = useState(true);
-  
-  // 1. NOVO ESTADO para guardar a URL final do checkout.
-  const [checkoutUrl, setCheckoutUrl] = useState("https://pay.kirvano.com/51c9da2f-ca9e-4fa4-ae34-f0e646202aba");
+
+  // --- NOVA ABORDAGEM: CONSTRUÇÃO IMEDIATA ---
+  // 1. Definimos a URL base.
+  const baseUrl = "https://pay.kirvano.com/51c9da2f-ca9e-4fa4-ae34-f0e646202aba";
+  let finalCheckoutUrl = baseUrl; // Por padrão, a URL final é a base.
+
+  // 2. Verificamos os parâmetros da URL da página de forma síncrona.
+  //    Isso garante que o código rode antes que o script da VSL possa inicializar.
+  if (typeof window !== "undefined") {
+    const urlParams = new URLSearchParams(window.location.search);
+    if (urlParams.toString()) {
+      finalCheckoutUrl = `${baseUrl}?${urlParams.toString()}`;
+    }
+  }
+  // A variável 'finalCheckoutUrl' agora tem o link com os UTMs desde o início.
+  // Não precisamos mais do useState ou useEffect para isso.
 
   // Carregar script da VSL (sem alterações aqui)
   useEffect(() => {
@@ -21,24 +34,11 @@ function App() {
       }
     };
   }, []);
-  
-  // 2. USEEFFECT MODIFICADO para construir a URL completa e salvá-la no estado.
-  useEffect(() => {
-    const baseUrl = "https://pay.kirvano.com/51c9da2f-ca9e-4fa4-ae34-f0e646202aba";
-    const urlParams = new URLSearchParams(window.location.search);
 
-    // Se existirem parâmetros na URL da página (utm_source, etc.)
-    if (urlParams.toString()) {
-        // Cria a URL final e a guarda no nosso estado
-        setCheckoutUrl(`${baseUrl}?${urlParams.toString()}`);
-    }
-  }, []);
-
-  // Esta função agora usa a URL do estado, caso seu botão ainda seja usado.
+  // A função de clique usa a variável que criamos.
   const handleCheckoutClick = () => {
-    window.location.href = checkoutUrl;
+    window.location.href = finalCheckoutUrl;
   };
-
 
   return (
     <div className="min-h-screen bg-gray-50 flex flex-col">
@@ -68,12 +68,12 @@ function App() {
 
           {/* VSL Player */}
           <div className="max-w-xs mx-auto mb-8 md:mb-10" id="vsl-container">
-            {/* 3. MUDANÇA PRINCIPAL: Adicionado data-param-redirect_url para passar a URL ao player */}
+            {/* 3. Usamos a variável 'finalCheckoutUrl' diretamente aqui. */}
             <div 
               dangerouslySetInnerHTML={{
                 __html: `<vturb-smartplayer 
                            id="vid-6877d2e30fe8209acf4cca58"
-                           data-param-redirect_url="${checkoutUrl}"
+                           data-param-redirect_url="${finalCheckoutUrl}"
                            style="display: block; margin: 0 auto; width: 100%; max-width: 400px;"></vturb-smartplayer>`
               }}
             />
