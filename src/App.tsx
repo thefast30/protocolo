@@ -39,12 +39,9 @@ function App() {
           <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold text-gray-800 mb-6 md:mb-8 leading-tight px-4">
             <span className="block mb-2 md:mb-4">
               Você sente dores no JOELHO ao andar ou na COLUNA ao se abaixar?
-            </span>
-            <span className="block text-center">
-              Você sente dores no JOELHO ao andar ou na COLUNA ao se abaixar?
-            </span>
-            <span className="block text-green-600 mt-2 text-center">
-              Isso pode NÃO ser culpa da sua idade.
+              <span className="block text-green-600 mt-2">
+                Isso pode NÃO ser culpa da sua idade.
+              </span>
             </span>
           </h1>
           
