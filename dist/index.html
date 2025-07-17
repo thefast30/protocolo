@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Landing Page - Protocolo Alívio Já</title>
+    <script>
+      // Capturar UTMs imediatamente quando a página carrega
+      (function() {
+        const urlParams = new URLSearchParams(window.location.search);
+        const utmKeys = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_term', 'utm_content', 'click_id', 'fbclid', 'gclid', 'src', 'sck'];
+        
+        utmKeys.forEach(key => {
+          const value = urlParams.get(key);
+          if (value) {
+            localStorage.setItem(`utm_${key}`, value);
+            console.log(`UTM captured: ${key} = ${value}`);
+          }
+        });
+      })();
+    </script>
+    <script 
+        src="https://cdn.xtracky.com/scripts/utm-handler.js"
+        data-token="81ba3b2d-f793-40f6-9f7c-829878487431"
+        data-click-id-param="click_id"
+        async>
+    </script>
+    <script type="module" crossorigin src="/assets/index-T25WLJGx.js"></script>
+    <link rel="stylesheet" crossorigin href="/assets/index-D5XrpS60.css">
+  </head>
+  <body>
+    <div id="root"></div>
+  </body>
+</html>
