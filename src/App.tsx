@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
+import { useEffect } from 'react';
 import Logo from './components/Logo';
 
 function App() {
-  const [showButton, setShowButton] = useState(false);
-  const [timeLeft, setTimeLeft] = useState(180); // 3 minutos em segundos
+  const [showButton, setShowButton] = useState(true);
+  const [utmParams, setUtmParams] = useState('');
 
   // Carregar script da VSL
   React.useEffect(() => {
@@ -20,53 +21,66 @@ function App() {
       }
     };
   }, []);
+  
+  // Extract UTM parameters from current URL
+  useEffect(() => {
+    const urlParams = new URLSearchParams(window.location.search);
+    const utmKeys = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_term', 'utm_content', 'click_id', 'fbclid', 'gclid'];
+    const params = new URLSearchParams();
+    
+    utmKeys.forEach(key => {
+      const value = urlParams.get(key);
+      if (value) {
+        params.append(key, value);
+      }
+    });
+    
+    setUtmParams(params.toString());
+  }, []);
 
-  // Timer effect
-  React.useEffect(() => {
-    if (timeLeft > 0) {
-      const timer = setTimeout(() => {
-        setTimeLeft(timeLeft - 1);
-      }, 1000);
-      return () => clearTimeout(timer);
-    } else {
-      setShowButton(true);
+  // Function to append UTM parameters to checkout URLs
+  const getCheckoutUrl = (baseUrl: string) => {
+    if (utmParams) {
+      return `${baseUrl}?${utmParams}`;
     }
-  }, [timeLeft]);
-
-  const scrollToCheckout = () => {
-    window.open('https://pay.kirvano.com/51c9da2f-ca9e-4fa4-ae34-f0e646202aba', '_blank');
+    return baseUrl;
   };
 
+  const handleCheckoutClick = () => {
+    const baseUrl = "https://pay.kirvano.com/51c9da2f-ca9e-4fa4-ae34-f0e646202aba";
+    const finalUrl = getCheckoutUrl(baseUrl);
+    window.location.href = finalUrl;
+  };
+
+
   return (
-    <div className="min-h-screen bg-white font-inter">
-      {/* Header Fixo */}
-      <header className="fixed top-0 left-0 right-0 bg-white shadow-md z-50 py-3 md:py-4">
-        <div className="container mx-auto px-4 flex justify-center items-center">
+    <div className="min-h-screen bg-gray-50 flex flex-col">
+      {/* Header */}
+      <header className="bg-white shadow-sm py-4 md:py-6">
+        <div className="container mx-auto px-4">
           <Logo />
         </div>
       </header>
 
-      {/* Hero Section com VSL */}
-      <section className="pt-20 md:pt-24 pb-8 md:pb-12 bg-gradient-to-b from-green-50 to-white min-h-screen flex flex-col justify-center">
-        <div className="container mx-auto px-4 text-center max-w-4xl">
-          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-black text-gray-800 mb-8 md:mb-10 leading-tight font-playfair tracking-tight">
-            Você sente dores nas<br className="hidden sm:block" />
-            <span className="block mt-2 md:mt-3">articulações?</span><br />
-            <span className="text-green-600 bg-gradient-to-r from-green-600 to-green-700 bg-clip-text text-transparent drop-shadow-sm block mt-2 md:mt-3">
-              Isso pode NÃO ser culpa<br className="hidden sm:block" />
-              <span className="block mt-2 md:mt-3 text-red-600 bg-gradient-to-r from-red-600 to-red-700 bg-clip-text text-transparent font-extrabold text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl drop-shadow-md">
-                da sua idade.
+      {/* Main Content */}
+      <section className="flex-1 py-12 md:py-16 lg:py-20">
+        <div className="container mx-auto text-center">
+          <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold text-gray-800 mb-6 md:mb-8 leading-tight px-4">
+            <span className="block mb-2 md:mb-4">
+              Finalmente! O Protocolo Natural que
+              <span className="block text-green-600 mt-2">
+                Elimina a Dor nas Costas em 7 Dias
               </span>
             </span>
           </h1>
           
-          <p className="text-lg sm:text-xl md:text-2xl lg:text-3xl text-gray-600 mb-10 md:mb-12 max-w-4xl mx-auto leading-relaxed px-2 font-medium">
+          <p className="text-base sm:text-lg md:text-xl lg:text-2xl text-gray-600 mb-8 md:mb-10 max-w-3xl mx-auto leading-relaxed px-2 font-medium">
             Descubra o protocolo caseiro que está devolvendo a liberdade de milhares de brasileiros, 
             <strong className="text-green-600 font-bold"> sem remédios caros nem efeitos colaterais.</strong>
           </p>
 
           {/* VSL Player */}
-          <div className="max-w-sm mx-auto mb-10 md:mb-12" id="vsl-container">
+          <div className="max-w-xs mx-auto mb-8 md:mb-10" id="vsl-container">
             <div 
               dangerouslySetInnerHTML={{
                 __html: `<vturb-smartplayer id="vid-6877d2e30fe8209acf4cca58" style="display: block; margin: 0 auto; width: 100%; max-width: 400px;"></vturb-smartplayer>`
@@ -77,10 +91,10 @@ function App() {
           {showButton && (
             <div className="px-4">
               <button 
-                onClick={scrollToCheckout}
-                className="w-full sm:w-auto bg-gradient-to-r from-green-600 to-green-700 hover:from-green-700 hover:to-green-800 text-white px-10 sm:px-16 py-5 sm:py-6 rounded-full text-xl sm:text-2xl font-bold shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-105 max-w-md mx-auto block border-2 border-green-500"
+                onClick={handleCheckoutClick}
+                className="w-full sm:w-auto bg-gradient-to-r from-green-600 to-green-700 hover:from-green-700 hover:to-green-800 text-white px-8 sm:px-12 py-4 sm:py-5 rounded-full text-lg sm:text-xl font-bold shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-105 max-w-sm mx-auto block border-2 border-green-500"
               >
-                🎯 Quero Começar Agora
+                SIM, QUERO ALÍVIO IMEDIATO!
               </button>
             </div>
           )}
