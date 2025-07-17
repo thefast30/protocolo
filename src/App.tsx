@@ -1,54 +1,25 @@
 import React, { useState } from 'react';
-import { useEffect } from 'react';
 import Logo from './components/Logo';
+import VSLPlayer from './components/VSLPlayer';
+import { UTMHandler } from './utils/utmHandler';
 
 function App() {
   const [showButton, setShowButton] = useState(true);
-  const [utmParams, setUtmParams] = useState('');
+  const [utmHandler] = useState(() => new UTMHandler());
 
-  // Carregar script da VSL
+  // Log UTM parameters for debugging
   React.useEffect(() => {
-    const script = document.createElement("script");
-    script.src = "https://scripts.converteai.net/0335ec20-c9d4-4221-a36e-428ccf9162ce/players/6877d2e30fe8209acf4cca58/v4/player.js";
-    script.async = true;
-    document.head.appendChild(script);
-    
-    return () => {
-      // Cleanup se necessário
-      const existingScript = document.querySelector(`script[src="${script.src}"]`);
-      if (existingScript) {
-        document.head.removeChild(existingScript);
-      }
-    };
-  }, []);
-  
-  // Extract UTM parameters from current URL
-  useEffect(() => {
-    const urlParams = new URLSearchParams(window.location.search);
-    const utmKeys = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_term', 'utm_content', 'click_id', 'fbclid', 'gclid'];
-    const params = new URLSearchParams();
-    
-    utmKeys.forEach(key => {
-      const value = urlParams.get(key);
-      if (value) {
-        params.append(key, value);
-      }
-    });
-    
-    setUtmParams(params.toString());
-  }, []);
-
-  // Function to append UTM parameters to checkout URLs
-  const getCheckoutUrl = (baseUrl: string) => {
-    if (utmParams) {
-      return `${baseUrl}?${utmParams}`;
-    }
-    return baseUrl;
-  };
+    utmHandler.logUTMParams();
+  }, [utmHandler]);
 
   const handleCheckoutClick = () => {
     const baseUrl = "https://pay.kirvano.com/51c9da2f-ca9e-4fa4-ae34-f0e646202aba";
-    const finalUrl = getCheckoutUrl(baseUrl);
+    const finalUrl = utmHandler.getCheckoutUrl(baseUrl);
+    
+    // Log para debug
+    console.log('Redirecting to:', finalUrl);
+    console.log('UTM String:', utmHandler.getUTMString());
+    
     window.location.href = finalUrl;
   };
 
@@ -79,14 +50,7 @@ function App() {
             <strong className="text-green-600 font-bold"> sem remédios caros nem efeitos colaterais.</strong>
           </p>
 
-          {/* VSL Player */}
-          <div className="max-w-xs mx-auto mb-8 md:mb-10" id="vsl-container">
-            <div 
-              dangerouslySetInnerHTML={{
-                __html: `<vturb-smartplayer id="vid-6877d2e30fe8209acf4cca58" style="display: block; margin: 0 auto; width: 100%; max-width: 400px;"></vturb-smartplayer>`
-              }}
-            />
-          </div>
+          <VSLPlayer onVideoEnd={() => setShowButton(true)} />
 
           {showButton && (
             <div className="px-4">
