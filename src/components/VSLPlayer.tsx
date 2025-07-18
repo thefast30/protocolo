@@ -8,7 +8,7 @@ const VSLPlayer: React.FC<VSLPlayerProps> = ({ onVideoEnd }) => {
   useEffect(() => {
     // Carregar script da VSL
     const script = document.createElement("script");
-    script.src = "https://scripts.converteai.net/0335ec20-c9d4-4221-a36e-428ccf9162ce/players/6877d2e30fe8209acf4cca58/v4/player.js";
+    script.src = "https://scripts.converteai.net/0335ec20-c9d4-4221-a36e-428ccf9162ce/players/687a84c00379461ec9c520e1/v4/player.js";
     script.async = true;
     
     script.onload = () => {
@@ -18,7 +18,7 @@ const VSLPlayer: React.FC<VSLPlayerProps> = ({ onVideoEnd }) => {
       if (onVideoEnd) {
         // Tentar detectar fim do vídeo (pode variar dependendo do player)
         const checkVideoEnd = setInterval(() => {
-          const player = document.querySelector('#vid-6877d2e30fe8209acf4cca58');
+          const player = document.querySelector('#vid-687a84c00379461ec9c520e1');
           if (player) {
             // Aqui você pode adicionar lógica específica do player se necessário
             // Por enquanto, vamos usar um timeout como exemplo
@@ -46,7 +46,7 @@ const VSLPlayer: React.FC<VSLPlayerProps> = ({ onVideoEnd }) => {
     <div className="max-w-xs mx-auto mb-8 md:mb-10" id="vsl-container">
       <div 
         dangerouslySetInnerHTML={{
-          __html: `<vturb-smartplayer id="vid-6877d2e30fe8209acf4cca58" style="display: block; margin: 0 auto; width: 100%; max-width: 400px;"></vturb-smartplayer>`
+          __html: `<vturb-smartplayer id="vid-687a84c00379461ec9c520e1" style="display: block; margin: 0 auto; width: 100%; max-width: 400px;"></vturb-smartplayer>`
         }}
       />
     </div>
