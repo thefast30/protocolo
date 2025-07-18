@@ -8,16 +8,31 @@
     <script>
       // Capturar UTMs imediatamente quando a página carrega
       (function() {
+        console.log('🔍 Iniciando captura de UTMs...');
         const urlParams = new URLSearchParams(window.location.search);
+        console.log('📍 URL atual:', window.location.href);
+        console.log('📋 Parâmetros encontrados:', urlParams.toString());
+        
         const utmKeys = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_term', 'utm_content', 'click_id', 'fbclid', 'gclid', 'src', 'sck'];
         
+        let capturedCount = 0;
         utmKeys.forEach(key => {
           const value = urlParams.get(key);
           if (value) {
             localStorage.setItem(`utm_${key}`, value);
-            console.log(`UTM captured: ${key} = ${value}`);
+            sessionStorage.setItem(`utm_${key}`, value);
+            console.log(`✅ UTM captured: ${key} = ${value}`);
+            capturedCount++;
           }
         });
+        
+        console.log(`📊 Total UTMs capturadas: ${capturedCount}`);
+        
+        // Salvar timestamp da captura
+        if (capturedCount > 0) {
+          localStorage.setItem('utm_captured_at', new Date().toISOString());
+          sessionStorage.setItem('utm_captured_at', new Date().toISOString());
+        }
       })();
     </script>
     <script 

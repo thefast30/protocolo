@@ -15,14 +15,21 @@ function App() {
   }, [utmHandler]);
 
   const handleCheckoutClick = () => {
+    console.log('🖱️ Botão de checkout clicado');
+    console.log('📱 User Agent:', navigator.userAgent);
+    console.log('🌐 URL atual:', window.location.href);
+    
     const baseUrl = "https://pay.kirvano.com/51c9da2f-ca9e-4fa4-ae34-f0e646202aba";
     const finalUrl = utmHandler.getCheckoutUrl(baseUrl);
     
     // Log para debug
-    console.log('Redirecting to:', finalUrl);
-    console.log('UTM String:', utmHandler.getUTMString());
+    console.log('🚀 Redirecting to:', finalUrl);
+    console.log('🏷️ UTM String:', utmHandler.getUTMString());
     
-    window.location.href = finalUrl;
+    // Adicionar um pequeno delay para garantir que os logs sejam vistos
+    setTimeout(() => {
+      window.location.href = finalUrl;
+    }, 100);
   };
 
 
