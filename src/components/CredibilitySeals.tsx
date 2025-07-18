@@ -1,0 +1,103 @@
+import React from 'react';
+import { Shield, Users, Award, TrendingUp, CheckCircle, Zap } from 'lucide-react';
+
+const CredibilitySeals = () => {
+  const stats = [
+    {
+      icon: Users,
+      number: "+50.000",
+      text: "Pessoas Beneficiadas",
+      color: "text-blue-600"
+    },
+    {
+      icon: TrendingUp,
+      number: "94%",
+      text: "Taxa de Sucesso",
+      color: "text-green-600"
+    },
+    {
+      icon: Zap,
+      number: "15 dias",
+      text: "Resultado Médio",
+      color: "text-purple-600"
+    }
+  ];
+
+  const seals = [
+    {
+      icon: Shield,
+      title: "Baseado em Ciência",
+      subtitle: "Estudos comprovados",
+      color: "bg-blue-50 text-blue-600"
+    },
+    {
+      icon: Award,
+      title: "Aprovado por Especialistas",
+      subtitle: "Fisioterapeutas recomendam",
+      color: "bg-green-50 text-green-600"
+    },
+    {
+      icon: CheckCircle,
+      title: "100% Natural",
+      subtitle: "Sem efeitos colaterais",
+      color: "bg-purple-50 text-purple-600"
+    }
+  ];
+
+  const mediaLogos = [
+    "Revista Saúde",
+    "Portal Bem Estar",
+    "Jornal da Medicina",
+    "Saúde em Foco"
+  ];
+
+  return (
+    <section className="py-12 md:py-16 bg-white">
+      <div className="container mx-auto px-4">
+        {/* Estatísticas */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8 mb-12 md:mb-16">
+          {stats.map((stat, index) => (
+            <div key={index} className="text-center">
+              <div className={`inline-flex items-center justify-center w-16 h-16 rounded-full bg-gray-50 mb-4`}>
+                <stat.icon className={`w-8 h-8 ${stat.color}`} />
+              </div>
+              <div className={`text-3xl md:text-4xl font-bold ${stat.color} mb-2`}>
+                {stat.number}
+              </div>
+              <p className="text-gray-600 font-medium">{stat.text}</p>
+            </div>
+          ))}
+        </div>
+
+        {/* Selos de Credibilidade */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8 mb-12 md:mb-16">
+          {seals.map((seal, index) => (
+            <div key={index} className="text-center">
+              <div className={`inline-flex items-center justify-center w-20 h-20 rounded-2xl ${seal.color} mb-4`}>
+                <seal.icon className="w-10 h-10" />
+              </div>
+              <h3 className="text-lg font-bold text-gray-800 mb-2">{seal.title}</h3>
+              <p className="text-gray-600">{seal.subtitle}</p>
+            </div>
+          ))}
+        </div>
+
+        {/* Menções na Mídia */}
+        <div className="text-center">
+          <h3 className="text-xl md:text-2xl font-bold text-gray-800 mb-6">
+            Mencionado na Mídia Especializada
+          </h3>
+          <div className="flex flex-wrap justify-center items-center gap-6 md:gap-8">
+            {mediaLogos.map((logo, index) => (
+              <div key={index} className="bg-gray-100 px-6 py-3 rounded-lg">
+                <span className="text-gray-700 font-semibold text-sm md:text-base">{logo}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+};
+
+export default CredibilitySeals;

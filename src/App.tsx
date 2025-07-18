@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import Logo from './components/Logo';
 import VSLPlayer from './components/VSLPlayer';
+import Testimonials from './components/Testimonials';
+import CredibilitySeals from './components/CredibilitySeals';
 import { UTMHandler } from './utils/utmHandler';
 
 function App() {
@@ -64,6 +66,12 @@ function App() {
           )}
         </div>
       </section>
+
+      {/* Depoimentos */}
+      <Testimonials />
+
+      {/* Selos de Credibilidade */}
+      <CredibilitySeals />
 
       {/* Rodapé */}
       <footer className="bg-gray-800 text-white py-10 md:py-12 mt-auto">
