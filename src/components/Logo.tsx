@@ -61,10 +61,10 @@ const Logo = () => {
       
       {/* Texto do Logo */}
       <div className="flex flex-col">
-        <span className="text-lg md:text-xl lg:text-2xl font-bold text-gray-800 font-playfair leading-tight">
+        <span className="text-lg md:text-xl lg:text-2xl font-bold text-gray-800 font-poppins leading-tight">
           PROTOCOLO
         </span>
-        <span className="text-lg md:text-xl lg:text-2xl font-bold text-green-600 font-playfair leading-tight -mt-1">
+        <span className="text-lg md:text-xl lg:text-2xl font-bold text-green-600 font-poppins leading-tight -mt-1">
           ALÍVIO JÁ
         </span>
       </div>

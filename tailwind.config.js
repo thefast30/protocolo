@@ -4,8 +4,9 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        'inter': ['Inter', 'system-ui', 'sans-serif'],
-        'playfair': ['Playfair Display', 'serif'],
+        'poppins': ['Poppins', 'system-ui', 'sans-serif'],
+        'montserrat': ['Montserrat', 'system-ui', 'sans-serif'],
+        'opensans': ['Open Sans', 'system-ui', 'sans-serif'],
       },
       fontSize: {
         'xs': ['0.75rem', { lineHeight: '1.2rem' }],
