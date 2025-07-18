@@ -7,7 +7,7 @@ const Testimonials = () => {
       name: "Maria Silva",
       age: 58,
       location: "São Paulo, SP",
-      image: "https://images.pexels.com/photos/415829/pexels-photo-415829.jpeg?auto=compress&cs=tinysrgb&w=150&h=150&fit=crop",
+      image: "https://i.imgur.com/XqJTWi8.jpeg",
       rating: 5,
       text: "Há 3 anos sofria com dores terríveis no joelho. Não conseguia nem subir escadas. Em apenas 2 semanas seguindo o protocolo, voltei a caminhar sem dor!"
     },
@@ -15,7 +15,7 @@ const Testimonials = () => {
       name: "João Santos",
       age: 62,
       location: "Rio de Janeiro, RJ",
-      image: "https://images.pexels.com/photos/1222271/pexels-photo-1222271.jpeg?auto=compress&cs=tinysrgb&w=150&h=150&fit=crop",
+      image: "https://i.imgur.com/dLdlDrW.jpeg",
       rating: 5,
       text: "Minha coluna doía tanto que mal conseguia me abaixar. Depois do protocolo, me sinto 20 anos mais jovem. Incrível como algo tão simples funciona!"
     },
