@@ -28,7 +28,7 @@ function App() {
     <div className="min-h-screen bg-gray-50 flex flex-col">
       {/* Header */}
       <header className="bg-white shadow-sm py-4 md:py-6">
-        <div className="container mx-auto px-4">
+        <div className="container mx-auto px-4 flex justify-center">
           <Logo />
         </div>
       </header>
