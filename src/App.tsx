@@ -4,7 +4,7 @@ import VSLPlayer from './components/VSLPlayer';
 
 // A VERSÃO FINAL. À PROVA DE AMADORES.
 function App() {
-  const [showButton, setShowButton] = useState(false);
+  const [showButton, setShowButton] = useState(true);
 
   const handleCheckoutClick = () => {
     console.log('🖱️ CLICOU NESSA PORRA');
