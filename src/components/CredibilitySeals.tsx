@@ -52,45 +52,45 @@ const CredibilitySeals = () => {
   ];
 
   return (
-    <section className="py-12 md:py-16 bg-white">
+    <section className="py-8 md:py-12 bg-white">
       <div className="container mx-auto px-4">
         {/* Estatísticas */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8 mb-12 md:mb-16">
+        <div className="grid grid-cols-3 gap-4 md:gap-6 mb-8 md:mb-12">
           {stats.map((stat, index) => (
             <div key={index} className="text-center">
-              <div className={`inline-flex items-center justify-center w-16 h-16 rounded-full bg-gray-50 mb-4`}>
-                <stat.icon className={`w-8 h-8 ${stat.color}`} />
+              <div className={`inline-flex items-center justify-center w-12 h-12 md:w-16 md:h-16 rounded-full bg-gray-50 mb-2 md:mb-4`}>
+                <stat.icon className={`w-6 h-6 md:w-8 md:h-8 ${stat.color}`} />
               </div>
-              <div className={`text-3xl md:text-4xl font-bold ${stat.color} mb-2`}>
+              <div className={`text-xl md:text-3xl font-bold ${stat.color} mb-1 md:mb-2`}>
                 {stat.number}
               </div>
-              <p className="text-gray-600 font-medium">{stat.text}</p>
+              <p className="text-gray-600 font-medium text-xs md:text-base">{stat.text}</p>
             </div>
           ))}
         </div>
 
         {/* Selos de Credibilidade */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8 mb-12 md:mb-16">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6 mb-8 md:mb-12">
           {seals.map((seal, index) => (
             <div key={index} className="text-center">
-              <div className={`inline-flex items-center justify-center w-20 h-20 rounded-2xl ${seal.color} mb-4`}>
-                <seal.icon className="w-10 h-10" />
+              <div className={`inline-flex items-center justify-center w-16 h-16 md:w-20 md:h-20 rounded-xl ${seal.color} mb-3 md:mb-4`}>
+                <seal.icon className="w-8 h-8 md:w-10 md:h-10" />
               </div>
-              <h3 className="text-lg font-bold text-gray-800 mb-2">{seal.title}</h3>
-              <p className="text-gray-600">{seal.subtitle}</p>
+              <h3 className="text-base md:text-lg font-bold text-gray-800 mb-1 md:mb-2">{seal.title}</h3>
+              <p className="text-gray-600 text-sm md:text-base">{seal.subtitle}</p>
             </div>
           ))}
         </div>
 
         {/* Menções na Mídia */}
         <div className="text-center">
-          <h3 className="text-xl md:text-2xl font-bold text-gray-800 mb-6">
+          <h3 className="text-lg md:text-xl font-bold text-gray-800 mb-4 md:mb-6">
             Mencionado na Mídia Especializada
           </h3>
-          <div className="flex flex-wrap justify-center items-center gap-6 md:gap-8">
+          <div className="flex flex-wrap justify-center items-center gap-3 md:gap-6">
             {mediaLogos.map((logo, index) => (
-              <div key={index} className="bg-gray-100 px-6 py-3 rounded-lg">
-                <span className="text-gray-700 font-semibold text-sm md:text-base">{logo}</span>
+              <div key={index} className="bg-gray-100 px-3 py-2 md:px-6 md:py-3 rounded-lg">
+                <span className="text-gray-700 font-semibold text-xs md:text-base">{logo}</span>
               </div>
             ))}
           </div>
