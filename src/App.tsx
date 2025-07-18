@@ -73,7 +73,7 @@ function App() {
 
           <VSLPlayer onTimeUpdate={(time) => {
             // Lógica para mostrar o botão. Ex: 720 segundos = 12 minutos
-            if (time >= 720 && !showButton) {
+            if (time >= 10 && !showButton) {
               setShowButton(true);
             }
           }} />
